@@ -1,147 +1,16 @@
 {
-  "id": "b184c050-b0a9-43cd-934a-d713c07b1caf",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "1c1dd31d-b772-4d8d-aef6-c1927b7ce9b4",
+  "prevId": "3d912013-a054-4aeb-ad7a-ffbb5b42b7f0",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.apartment": {
-      "name": "apartment",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "tower_id": {
-          "name": "tower_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "number": {
-          "name": "number",
-          "type": "varchar(10)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "floor": {
-          "name": "floor",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "apartment_tower_id_tower_id_fk": {
-          "name": "apartment_tower_id_tower_id_fk",
-          "tableFrom": "apartment",
-          "tableTo": "tower",
-          "columnsFrom": ["tower_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.condominium": {
-      "name": "condominium",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "address": {
-          "name": "address",
-          "type": "varchar(200)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "subscription_status": {
-          "name": "subscription_status",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.doorman": {
-      "name": "doorman",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "condominium_id": {
-          "name": "condominium_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "shift": {
-          "name": "shift",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "doorman_condominium_id_condominium_id_fk": {
-          "name": "doorman_condominium_id_condominium_id_fk",
-          "tableFrom": "doorman",
-          "tableTo": "condominium",
-          "columnsFrom": ["condominium_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
     "public.package": {
       "name": "package",
       "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
@@ -159,13 +28,13 @@
         },
         "recipient": {
           "name": "recipient",
-          "type": "varchar(150)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "confirmation_code": {
           "name": "confirmation_code",
-          "type": "varchar(50)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -197,19 +66,248 @@
           "name": "package_apartment_id_apartment_id_fk",
           "tableFrom": "package",
           "tableTo": "apartment",
-          "columnsFrom": ["apartment_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "columnsFrom": [
+            "apartment_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
         },
         "package_doorman_id_doorman_id_fk": {
           "name": "package_doorman_id_doorman_id_fk",
           "tableFrom": "package",
           "tableTo": "doorman",
-          "columnsFrom": ["doorman_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "columnsFrom": [
+            "doorman_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.condominium": {
+      "name": "condominium",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "address": {
+          "name": "address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "condominium_number": {
+          "name": "condominium_number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "subscription_status": {
+          "name": "subscription_status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.apartment": {
+      "name": "apartment",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "tower_id": {
+          "name": "tower_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "number": {
+          "name": "number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "floor": {
+          "name": "floor",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "apartment_tower_id_tower_id_fk": {
+          "name": "apartment_tower_id_tower_id_fk",
+          "tableFrom": "apartment",
+          "tableTo": "tower",
+          "columnsFrom": [
+            "tower_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.doorman": {
+      "name": "doorman",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "condominium_id": {
+          "name": "condominium_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "shift": {
+          "name": "shift",
+          "type": "shift_enum",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "doorman_condominium_id_condominium_id_fk": {
+          "name": "doorman_condominium_id_condominium_id_fk",
+          "tableFrom": "doorman",
+          "tableTo": "condominium",
+          "columnsFrom": [
+            "condominium_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.receiver": {
+      "name": "receiver",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "condominium_id": {
+          "name": "condominium_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "receiver_condominium_id_condominium_id_fk": {
+          "name": "receiver_condominium_id_condominium_id_fk",
+          "tableFrom": "receiver",
+          "tableTo": "condominium",
+          "columnsFrom": [
+            "condominium_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
         }
       },
       "compositePrimaryKeys": {},
@@ -224,7 +322,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
@@ -236,19 +334,13 @@
         },
         "name": {
           "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "email": {
-          "name": "email",
-          "type": "varchar(150)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "whatsapp": {
           "name": "whatsapp",
-          "type": "varchar(20)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         }
@@ -259,10 +351,14 @@
           "name": "resident_apartment_id_apartment_id_fk",
           "tableFrom": "resident",
           "tableTo": "apartment",
-          "columnsFrom": ["apartment_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "columnsFrom": [
+            "apartment_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
         }
       },
       "compositePrimaryKeys": {},
@@ -277,7 +373,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
@@ -289,31 +385,31 @@
         },
         "stripe_subscription_id": {
           "name": "stripe_subscription_id",
-          "type": "varchar(200)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "plan": {
           "name": "plan",
-          "type": "varchar(50)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "status": {
           "name": "status",
-          "type": "varchar(50)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "start_date": {
           "name": "start_date",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true
         },
         "end_date": {
           "name": "end_date",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": false
         }
@@ -324,10 +420,14 @@
           "name": "subscription_condominium_id_condominium_id_fk",
           "tableFrom": "subscription",
           "tableTo": "condominium",
-          "columnsFrom": ["condominium_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "columnsFrom": [
+            "condominium_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
         }
       },
       "compositePrimaryKeys": {},
@@ -342,7 +442,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
@@ -354,7 +454,7 @@
         },
         "name": {
           "name": "name",
-          "type": "varchar(100)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         }
@@ -365,10 +465,14 @@
           "name": "tower_condominium_id_condominium_id_fk",
           "tableFrom": "tower",
           "tableTo": "condominium",
-          "columnsFrom": ["condominium_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "columnsFrom": [
+            "condominium_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
         }
       },
       "compositePrimaryKeys": {},
@@ -382,7 +486,18 @@
     "public.package_status": {
       "name": "package_status",
       "schema": "public",
-      "values": ["DELIVERED", "PENDING_PICKUP"]
+      "values": [
+        "DELIVERED",
+        "PENDING_PICKUP"
+      ]
+    },
+    "public.shift_enum": {
+      "name": "shift_enum",
+      "schema": "public",
+      "values": [
+        "DAY",
+        "NIGHT"
+      ]
     }
   },
   "schemas": {},
