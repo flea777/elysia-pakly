@@ -1,14 +1,8 @@
-import { relations } from 'drizzle-orm'
-import {
-  text,
-  integer,
-  pgTable,
-  timestamp,
-  pgEnum,
-} from 'drizzle-orm/pg-core'
-import { apartment  } from './apartment'
-import { doorman } from './doorman'
 import { createId } from '@paralleldrive/cuid2'
+import { relations } from 'drizzle-orm'
+import { pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
+import { apartment } from './apartment'
+import { doorman } from './doorman'
 
 export const packageStatusEnum = pgEnum('package_status', [
   'DELIVERED',
@@ -16,15 +10,17 @@ export const packageStatusEnum = pgEnum('package_status', [
 ])
 
 export const packageTable = pgTable('package', {
-  id: text('id').$defaultFn(() => createId()).primaryKey(),
+  id: text('id')
+    .$defaultFn(() => createId())
+    .primaryKey(),
   apartmentId: text('apartment_id')
     .references(() => apartment.id, {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     })
     .notNull(),
-  doormanId: integer('doorman_id')
-    .references(() => doorman.id,{
+  doormanId: text('doorman_id')
+    .references(() => doorman.id, {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     })
