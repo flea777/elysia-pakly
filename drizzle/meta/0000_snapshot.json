@@ -1,5 +1,5 @@
 {
-  "id": "b68e34ba-5d0a-4e85-8655-d60d9afffe53",
+  "id": "03d55bae-1e10-4c07-b053-387165991f61",
   "prevId": "bc855942-5a7c-42d4-9b44-562d62e0935d",
   "version": "7",
   "dialect": "postgresql",
@@ -285,7 +285,8 @@
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": "now()"
         },
         "updated_at": {
           "name": "updated_at",
@@ -306,7 +307,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
+          "onDelete": "set null",
           "onUpdate": "cascade"
         }
       },
