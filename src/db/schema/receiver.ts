@@ -11,8 +11,7 @@ export const receiver = pgTable('receiver', {
     .references(() => condominium.id, {
       onDelete: 'set null',
       onUpdate: 'cascade',
-    })
-    .notNull(),
+    }),
   name: text('name').notNull(),
   email: text('email').notNull(),
   password: text('password').notNull(),
