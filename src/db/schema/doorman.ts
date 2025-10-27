@@ -24,7 +24,7 @@ export const doorman = pgTable('doorman', {
     .notNull(),
   name: text('name').notNull(),
   shift: shiftEnum('shift').notNull(),
-  createdAt: timestamp('created_at').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
 })
 
 export const doormanRelations = relations(doorman, ({ one, many }) => ({

@@ -16,7 +16,7 @@ export const resident = pgTable('resident', {
     })
     .notNull(),
   name: text('name').notNull(),
-  whatsapp: text('whatsapp'),
+  whatsapp: text('whatsapp').notNull(),
 })
 
 export const residentRelations = relations(resident, ({ one }) => ({
