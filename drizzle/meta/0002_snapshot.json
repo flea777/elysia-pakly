@@ -1,6 +1,6 @@
 {
-  "id": "b68e34ba-5d0a-4e85-8655-d60d9afffe53",
-  "prevId": "bc855942-5a7c-42d4-9b44-562d62e0935d",
+  "id": "1c1dd31d-b772-4d8d-aef6-c1927b7ce9b4",
+  "prevId": "3d912013-a054-4aeb-ad7a-ffbb5b42b7f0",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -10,19 +10,19 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
         "apartment_id": {
           "name": "apartment_id",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
         "doorman_id": {
           "name": "doorman_id",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
@@ -101,7 +101,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
@@ -144,13 +144,13 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
         "tower_id": {
           "name": "tower_id",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
@@ -195,13 +195,13 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
         "condominium_id": {
           "name": "condominium_id",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
@@ -253,13 +253,13 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
         "condominium_id": {
           "name": "condominium_id",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
@@ -328,7 +328,7 @@
         },
         "apartment_id": {
           "name": "apartment_id",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
@@ -373,13 +373,13 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
         "condominium_id": {
           "name": "condominium_id",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
@@ -442,13 +442,13 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
         "condominium_id": {
           "name": "condominium_id",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
